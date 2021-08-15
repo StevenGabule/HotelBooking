@@ -1,9 +1,9 @@
 import express from 'express';
+import { login, register } from '../controllers/authController';
 
 const router = express.Router();
 
-router.get('/:message', (req, res) => {
-  res.status(200).send(req.params.message);
-});
+router.post('/register', register);
+router.post('/login', login);
 
 module.exports = router;

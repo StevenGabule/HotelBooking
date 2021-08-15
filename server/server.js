@@ -22,6 +22,8 @@ mongoose
 // middlewares
 app.use(cors());
 app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)));
 
