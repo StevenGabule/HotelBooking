@@ -18,7 +18,6 @@ export const register = async (req, res) => {
     }
     const user = new User(req.body);
     const newUser = await user.save();
-    console.log('User has been created!');
     return res.json({ ok: true, user: newUser });
   } catch (error) {
     return res.status(400).send('Error:: ', error.message);
@@ -29,7 +28,7 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     let user = await User.findOne({ email }).exec();
-    if (!user) res.status(400).send('User with that email not found!');
+    if (!user) return res.status(400).send('User with that email not found!');
     user.comparePassword(password, (err, match) => {
       if (!match || err) {
         return res.status(400).send('Wrong password!');
